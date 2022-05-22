@@ -1,11 +1,8 @@
-/*
+/*#################################################
  * ModelViewController Class
- * Author Ahmed Mohamed
- * ID 041019389
- * Last Edited Apr 17th, 2022
- * Assignment 4 CST 8221_302
- * Professor Daniel Cormier
- */
+ * Author Ahmed Sid Mohamed
+ * Last Edited May 20th, 2022
+ #################################################*/
 import java.awt.event.*;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -47,7 +44,7 @@ public class ModelViewController extends JFrame {
     /*
      * Define JLabel objects
      */
-    protected JLabel logoLabel = new JLabel();
+    protected JLabel logoLabel ;//= new JLabel();
     protected JLabel scoreLabel = new JLabel("SCORE:   ");
     protected JLabel timerLabel = new JLabel("TIMER:   ");
     /*
@@ -73,10 +70,10 @@ public class ModelViewController extends JFrame {
     /*
      * Menu Icons
      */
-    protected Icon newgameicon = new ImageIcon("piciconnew.gif");
-    protected Icon exitIcon = new ImageIcon("piciconext.gif");
-    protected Icon solutionIcon = new ImageIcon("piciconsol.gif");
-    protected Icon aboutIcon = new ImageIcon("piciconabt.gif");
+    protected Icon newgameicon = new ImageIcon("src/Pictures/piciconnew.gif");
+    protected Icon exitIcon = new ImageIcon("src/Pictures/piciconext.gif");
+    protected Icon solutionIcon = new ImageIcon("src/Pictures/piciconsol.gif");
+    protected Icon aboutIcon = new ImageIcon("src/Pictures/piciconabt.gif");
     /*
      * MenuBar
      */
@@ -86,7 +83,7 @@ public class ModelViewController extends JFrame {
      */
     protected JMenu GameJM = new JMenu("GAME"); //menu tab with new, debug and exit
     protected JMenu HelpJM = new JMenu("HELP");
-    protected JMenu DebugMI = new JMenu("Debug");
+    //protected JMenu DebugMI = new JMenu("Debug");
     protected JMenu Network = new JMenu("NETWORK");
     /*
      * Menu Items
@@ -100,7 +97,7 @@ public class ModelViewController extends JFrame {
     protected JMenuItem Debug3 = new JMenuItem("Debug 3");
     protected int tally;
     protected Timer clock;
-    protected int secs=0, mins=0,period = 1000, delay =0;
+    protected int secs=0, mins=0,period = 1000, delay =0,a;
     /*
      *Networking Items
      */
@@ -108,7 +105,6 @@ public class ModelViewController extends JFrame {
     protected JMenuItem disconnect = new JMenuItem("Disconnect");
     protected JTextArea Input = new JTextArea();
     protected JButton submit = new JButton("SUBMIT");
-
     /**
      * Purpose: containing main grid, placement of each panel on the grid
      * Name: ModelViewController
@@ -133,7 +129,7 @@ public class ModelViewController extends JFrame {
         /*
          * Logo label containing the logo of the game wrapped around the logo panel
          */
-        Icon logo = new ImageIcon("Logo.png");
+        Icon logo = new ImageIcon("src/Pictures/Logo.png");
         logoLabel = new JLabel(logo); // store logo inside JLabel
         logoPane.setBackground(color2); // set background color of panel to match
         logoPane.add(logoLabel); // add logo label to logo panel
@@ -143,7 +139,7 @@ public class ModelViewController extends JFrame {
          * List of hints
          * will be set inside the mark panel on bottom left
          */
-        String hint = "How to Play " +
+        /*String hint = "How to Play " +
                 "\n1.Press ResetTimer to reset clock"+
                 "\n2.Press ResetGame to reset board"+
                 "\n3.Press Mark to mark boxes on board"+
@@ -152,12 +148,13 @@ public class ModelViewController extends JFrame {
                 "\n6.Press Ctrl+X to Exit Game"+
                 "\n7.For each correct box you will gain 1 points"+
                 "\n8.For each incorrect box you will lose 1 point"+
-                "\n9.To Win you must score 15 points or more";
+                "\n9.To Win you must score 15 points or more"+
+                "\n10.You Lose when you score -7 points or more";
         hints = new JTextArea(hint); //store the game guide inside a JTextarea
         hints.setFont(new Font(Font.SERIF,Font.ITALIC,10)); //set the font as Serif|Italic|10
         hints.setEditable(false); // cannot be edited
         hints.setBackground(color3); //set background color
-        markPane.add(hints); // add game hints into markPanel
+        markPane.add(hints); // add game hints into markPanel*/
 
         /*
          * Mark checkbox and panel at bottom left
@@ -215,6 +212,7 @@ public class ModelViewController extends JFrame {
         scorePane.setBackground(color2); //set background color for score box
         scorePane.add(scoreLabel); //add score label to panel
         scorePane.add(scoreArea); // add score box to panel
+        scorePane.setPreferredSize(new Dimension(150,100));
         add(scorePane,gridBagConstraints); //add to main grid
 
         /*
@@ -226,10 +224,12 @@ public class ModelViewController extends JFrame {
         gridBagConstraints.gridy=1; //y-axis position
         //create scrollbar that is vertical and horizontal
         chatbox = new JScrollPane(chat, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-        chatbox.setPreferredSize(new Dimension(300,500)); //set preferred size of the chatbox
+        chatbox.setPreferredSize(new Dimension(250,600)); //set preferred size of the chatbox
         chatbox.setFont(new Font(Font.SERIF, Font.ITALIC,15)); //create and set fonts
+        chat.setBackground(color3);
         rightPane.setBackground(color3); //set background color
         rightPane.add(chatbox,gridBagConstraints); //add chatbox to right panel
+        rightPane.setPreferredSize(new Dimension(150,650));
         add(rightPane,gridBagConstraints); //add to main grid
 
         /*
@@ -238,7 +238,7 @@ public class ModelViewController extends JFrame {
          */
         gridBagConstraints.gridx=3;
         gridBagConstraints.gridy=2;
-        restart_timer.setPreferredSize(new Dimension(150,100));
+        restart_timer.setPreferredSize(new Dimension(100,100));
         restart_timer.setFont(new Font(Font.SERIF,Font.BOLD,10));
         restart_timer.setBorder(BorderFactory.createMatteBorder(1,4,1,1,color3));
         bottomLeft.add(restart_timer);
@@ -251,8 +251,9 @@ public class ModelViewController extends JFrame {
         gridBagConstraints.gridx=3; //x-axis position
         gridBagConstraints.gridy=2; //y-axis position
         bottomLeft.setBackground(color3); //set background color
-        restart.setPreferredSize(new Dimension(150,100));
+        restart.setPreferredSize(new Dimension(100,100));
         restart.setFont(new Font(Font.SERIF,Font.BOLD,10));
+        bottomLeft.setPreferredSize(new Dimension(150,100));
         bottomLeft.add(restart); //add button to panel
 
         restart.setBorder(BorderFactory.createMatteBorder(1,4,1,1,color3));
@@ -325,7 +326,7 @@ public class ModelViewController extends JFrame {
          */
         mBar.add(GameJM);
         GameJM.add(NewGameMI);
-        GameJM.add(DebugMI);
+        //GameJM.add(DebugMI);
         GameJM.add(ExitMI);
         /*
          * Networking Submenu Items
@@ -342,9 +343,9 @@ public class ModelViewController extends JFrame {
         /*
          * Debug Submenu Items
          */
-        DebugMI.add(Debug1);
-        DebugMI.add(Debug2);
-        DebugMI.add(Debug3);
+        //DebugMI.add(Debug1);
+        //DebugMI.add(Debug2);
+        //DebugMI.add(Debug3);
         /*
          * Set menubar visible
          * adding items in submenu's and on help and game menu
@@ -369,21 +370,57 @@ public class ModelViewController extends JFrame {
         /*
          * Using timer task to set up a second and minute counter
          */
-        clock.schedule(new TimerTask() {
-            @Override
-            /*
-             * Purpose: to start the timerTask and store value of string inside of secs
-             * Name: Run()
-             */
-            public void run() {
-                timerArea.setText(String.valueOf(secs));
-                secs++;
-                mins++;
+        try {
+            clock.schedule(new TimerTask() {
+                @Override
+                /*
+                 * Purpose: to start the timerTask and store value of string inside of secs
+                 * Name: Run()
+                 */
+                public void run() {
+                    timerArea.setText(String.valueOf(secs));
+                    secs++;
+                    mins++;
 
-            }
-        },delay,period);
+                }
+            }, delay, period);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
-
+    public void cancelClock(){
+        clock.cancel();;
+        stopClock();
+    }
+    public void stopClock(){
+        secs=0;
+        timerArea.setText("");
+    }
+    public void gameReset(Model m) {
+        for (int z = 0; z < m.size;z++){
+            for(int y=0;y<m.size;y++){
+                this.gameButtons[z][y].setBackground(color3);
+                this.gameButtons[z][y].setEnabled(true);
+                this.gameButtons[z][y].setIcon(null);
+            }
+        }
+        restart.setEnabled(true);
+        markBox.setEnabled(true);
+    }
+    public void gameResetBut(Model m) {
+        for (int x = 0; x < m.size;x++){
+            for(int y=0;y<m.size;y++){
+                this.gameButtons[x][y].setBackground(color3);
+                this.gameButtons[x][y].setEnabled(true);
+                this.gameButtons[x][y].setIcon(null);
+            }
+        }
+        restart.setEnabled(true);
+        markBox.setEnabled(true);
+    }
+    public JButton getButtons(int x,int y){
+        return gameButtons[x][y];
+    }
 }
 
 /**
@@ -395,8 +432,10 @@ class Controller extends JFrame {
     /*
      * ImageIcons for game win and game lose
      */
-    ImageIcon winPic = new ImageIcon("gamepicwinner.png");
-    ImageIcon losePic = new ImageIcon("gamepicend.png");
+    ImageIcon winPic = new ImageIcon("src/Pictures/gamepicwin.png");
+    ImageIcon losePic = new ImageIcon("src/Pictures/gamepicloss.png");
+    ImageIcon xs = new ImageIcon("src/Pictures/xmark.png");
+    ImageIcon os = new ImageIcon("src/Pictures/omark.png");
     /*
      * Inherits ModelViewController and Model class and stores inside of objects
      */
@@ -406,8 +445,6 @@ class Controller extends JFrame {
     * Variable declarations
      */
     protected int x,y;
-    protected String winnerScore, loserScore;
-    protected String timerSecs;
     protected String client;
     protected int port;
     protected boolean isConnected = false;
@@ -415,7 +452,8 @@ class Controller extends JFrame {
     protected PrintWriter textOut;
     protected Socket socket;
     protected List<String> play;
-
+    String getGameTime;
+    String getGameScore;
     /**
      * Purpose: Parameterized constructor
      * Name: Controller
@@ -426,7 +464,6 @@ class Controller extends JFrame {
         this.mvc = mvc;
         this.mod = mod;
     }
-
     /**
      * Purpose: will add action listeners to all buttons and actions introduced inside the view class
      * Name: ViewListener
@@ -454,69 +491,81 @@ class Controller extends JFrame {
         mvc.disconnect.addActionListener(actionListener);
         mvc.submit.addActionListener(actionListener);
     }
-
     /**
      * Purpose: calculate the number of hints on the row from the plain and filled boxes generated by the model
      * Name: rHints
      * @param count of rows
      */
-    void rHints(int count){
-        int x,y,z;
-        for(x =0; x<count; x++){
-            z=0;
-            String s="";
-            for(y =0;y<count;y++){
-                if(mod.getClickedBox(y,x)==1){
-                    z++;
+    void rHints(int count,Model mod){
+        try{
+            for(int x =0; x<count; x++){
+                int z=0;
+                String s="";
+                for(int y =0;y<count;y++){
+                    if(mod.getClickedBox(x,y)==1){
+                        z++;
+                    }
+                }
+                if(s == ""){
+                    mvc.leftCol[x].setText(""+z);
+                }
+                else{
+                    if(z>0){
+                        mvc.leftCol[x].setText(s+z);
+                    }
+                    else{
+                        mvc.leftCol[x].setText(s);
+                    }
                 }
             }
-            if(s == ""){
-                mvc.topRow[x].setText(""+z);
+        }catch (Exception e)
+            {
+                //e.printStackTrace();
             }
-            if(z>0){
-                mvc.topRow[x].setText(s+z);
-            }
-            else{
-                mvc.topRow[x].setText(s);
-            }
-        }
     }
-
     /**
      * Purpose: calculate the number of hints on the column from the plain and filled boxes generated by the model
      * Name: cHints
      * @param count of columns
      */
-    void cHints(int count){
+    void cHints(int count,Model mod){
         int x,y,z;
-        for(x=0;x<count;x++){
-            z=0;
-            String s= "";
-            for(y=0;y<count;y++){
-                if(mod.getClickedBox(x,y)==1){
-                    z++;
+        try {
+            for (x = 0; x < count; x++) {
+                z = 0;
+                String s = "";
+                for (y = 0; y < count; y++) {
+                    if (mod.getClickedBox(y, x) == 1) {
+                        z++;
+                    }
+                }
+                if (s == "") {
+                    mvc.topRow[x].setText(""+z);
+                }
+                else{
+                    if (z > 0) {
+                    mvc.topRow[x].setText(s + z);
+                    }
+                    else {
+                    mvc.topRow[x].setText(s);
+                    }
                 }
             }
-            if(s==""){
-                mvc.leftCol[x].setText(""+z);
+        }catch (Exception e)
+            {
+                //e.printStackTrace();
             }
-            if(z>0){
-                mvc.leftCol[x].setText(s+z);
-            }
-            else{
-                mvc.leftCol[x].setText(s);
-            }
-        }
     }
-
     /**
      * Purpose: will set the game board and will add the hints to each row and column
      * Name: setGame
      */
     public void setGame(){
         mod.Game(); //add random game
-        mod.newGameBoard(); //setBoard
-        rHints(5);cHints(5); //set hits for 5 columns and rows
+        //mod.newGameBoard(); //setBoard
+        cHints(mod.size,mod);
+        rHints(mod.size,mod); //set hits for 5 columns and rows
+        mvc.setVisible(true);
         viewListener(new ControllerActions()); //add listener class to actionListeners
     }
     /**
@@ -528,24 +577,27 @@ class Controller extends JFrame {
     void buttonMarking(int x, int y){
         if(mvc.markBox.isSelected()==true){
             if(mod.getClickedBox(x,y)==0){
-                mvc.gameButtons[x][y].setBackground(Color.BLACK);
+                mvc.gameButtons[x][y].setBackground(Color.RED);
             }
             else if(mod.getClickedBox(x,y)!=0){
-                mvc.tally = mvc.tally;
+                //mvc.tally = mvc.tally;
                 mvc.gameButtons[x][y].setBackground(mvc.color4);
+                mvc.gameButtons[x][y].setIcon(os);
             }
         }
         if(mvc.markBox.isSelected()==false) {
             if (mod.getClickedBox(x, y) == 1) {
                 mvc.tally = mvc.tally + 2;
                 mvc.gameButtons[x][y].setBackground(mvc.color1);
+                mvc.gameButtons[x][y].setIcon(xs);
 
             } else if(mod.getClickedBox(x, y) != 1) {
                 mvc.tally = mvc.tally - 1;
-                mvc.gameButtons[x][y].setBackground(Color.BLACK);
+                mvc.gameButtons[x][y].setBackground(Color.RED);
             }
-        }
 
+        }
+        mvc.gameButtons[x][y].setEnabled(false);
     }
     /**
      * Purpose: to change score for every button pressed. Will return JOptionPane with win and lose
@@ -555,14 +607,14 @@ class Controller extends JFrame {
      */
     void buttonPressed(int x, int y){
         buttonMarking(x,y);
-        mvc.gameButtons[x][y].setEnabled(false);
         mvc.scoreArea.setText(mvc.tally+"");
-        mvc.gameButtons[x][y].addMouseListener(new MouseAdapter() {
-            /**
-             * MouseListener using MouseAdapter
-             * Purpose: to get click count of gameButton and return win or lose
-             * @param e
-             */
+        mvc.gameButtons[x][y].setEnabled(false);
+        /* mvc.gameButtons[x][y].addMouseListener(new MouseAdapter() {
+            //
+             // MouseListener using MouseAdapter
+             // Purpose: to get click count of gameButton and return win or lose
+             //@param e
+             //
             @Override
             public void mouseClicked(MouseEvent e) {
                 if(e.getClickCount()==25){
@@ -574,89 +626,101 @@ class Controller extends JFrame {
                         JOptionPane.showMessageDialog(null,"YOU LOSE","Loser",JOptionPane.WARNING_MESSAGE,losePic);
                     }
                 }
-               if(e.getClickCount()>25){
+                if(e.getClickCount()>25){
                    if(mvc.tally >=15){
                        JOptionPane.showMessageDialog(null,"YOU WON WITH A FEW BOXES REMAINING!!!","Winner",JOptionPane.WARNING_MESSAGE,winPic);
                    }
                    if(mvc.tally <0){
                        JOptionPane.showMessageDialog(null,"YOU LOST WITH A FEW BOXES REMAINING!!!","Loser",JOptionPane.WARNING_MESSAGE,losePic);
                    }
-               }
+                }
             }
         });
-        if(mvc.tally >=15){
+        if (mvc.tally >= 15) {
             //JOptionPane.showMessageDialog(null,"YOU WON","Winner",JOptionPane.WARNING_MESSAGE,winPic);
-            int win = JOptionPane.showConfirmDialog(null,"", "WINNER",JOptionPane.YES_NO_CANCEL_OPTION,JOptionPane.ERROR_MESSAGE,winPic);
-            switch (win){
+            int win = JOptionPane.showConfirmDialog(null, "", "WINNER", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.ERROR_MESSAGE, winPic);
+            getGameTime = mvc.timerArea.getText();
+            getGameScore = mvc.scoreArea.getText();
+            switch (win) {
                 case JOptionPane.YES_OPTION:
                     System.out.println("You have chosen to upload your score");
-                    winnerScore = mvc.scoreArea.getText();
-                    timerSecs = mvc.timerArea.getText();
+                    //winnerScore = mvc.scoreArea.getText();
+                    //timerSecs = mvc.timerArea.getText();
                     //this.mvc.secs = Integer.parseInt(timerSecs);
-                    mvc.clock.cancel();
                     System.out.println("Score Table updated with \n");
-                    System.out.println("Score :"+winnerScore);
-                    System.out.println("Timer :"+timerSecs);
-                    mvc.gameButtons[x][y].setDefaultCapable(false);
-                    mvc.gameButtons[x][y].setEnabled(false);
-                    mvc.restart.setEnabled(false);
-                    mvc.restart_timer.setEnabled(false);
-                    mvc.markBox.setEnabled(false);
+                    System.out.println("Score :" + getGameScore);
+                    System.out.println("Timer :" + getGameTime);
+                    //mod.Game();
                     mvc.clock.cancel();
-                    mod.Game();
                     break;
                 case JOptionPane.NO_OPTION:
                     System.out.println("You have chosen NOT to upload your score");
+                    //mvc.scoreArea.setText("");
+                    getGameScore = "0";
+                    getGameTime = "0";
+                    mvc.clock.cancel();
                     break;
                 case JOptionPane.CANCEL_OPTION:
                     System.out.println("You have chosen to cancel");
+                    //mvc.scoreArea.setText("");
+                    getGameScore = "0";
+                    getGameTime = "0";
+                    mvc.clock.cancel();
                     break;
             }
+            mvc.clock.cancel();
+            //mvc.gameButtons[x][y].setDefaultCapable(false);
+            //mvc.scoreArea.setText("0");
+            //mvc.tally = 0;
         }
-        if(mvc.tally <-5){
+        if (mvc.tally <= -5) {
             //JOptionPane.showMessageDialog(null,"YOU LOST","Loser",JOptionPane.WARNING_MESSAGE,losePic);
-            int lose = JOptionPane.showConfirmDialog(null, "","LOSER", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.ERROR_MESSAGE, losePic);
-            switch (lose){
+            int lose = JOptionPane.showConfirmDialog(null, "", "LOSER", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.ERROR_MESSAGE, losePic);
+            getGameTime = mvc.timerArea.getText();
+            getGameScore = mvc.scoreArea.getText();
+            switch (lose) {
                 case JOptionPane.YES_OPTION:
                     System.out.println("You have chosen to upload your score");
-                    loserScore = mvc.scoreArea.getText();
+                    getGameScore = mvc.scoreArea.getText();
                     System.out.println("Score Table updated with \n");
-                    System.out.println("Score :"+winnerScore);
-                    System.out.println("Timer :"+timerSecs);
-                    mvc.gameButtons[x][y].setDefaultCapable(false);
-                    mvc.gameButtons[x][y].setEnabled(false);
-                    mvc.restart.setEnabled(false);
-                    mvc.restart_timer.setEnabled(false);
-                    mvc.markBox.setEnabled(false);
+                    System.out.println("Score :" + getGameScore);
+                    System.out.println("Timer :" + getGameTime);
                     mvc.clock.cancel();
-                    mod.Game();
+                    //mod.Game();
                     break;
                 case JOptionPane.NO_OPTION:
                     System.out.println("You have chosen NOT to upload your score");
+                    mvc.clock.cancel();
                     break;
                 case JOptionPane.CANCEL_OPTION:
                     System.out.println("You have chosen to cancel");
+                    mvc.clock.cancel();
                     break;
             }
-        }
+            mvc.clock.cancel();
+            //mvc.scoreArea.setText("0");
+            //mvc.tally = 0;
+        }*/
     }
-
     /**
      * Purpose: Will set score back to zero and generated a new game board of buttons
      * Names: newBoard
      */
     void newBoard(){
-        mvc.scoreArea.setText("0");
-        mvc.tally=0;
-        for(x=0;x<5;x++){
-            for(y=0;y<5;y++){
+        for(x=0;x<mod.size;x++){
+            for(y=0;y<mod.size;y++){
                 mvc.gameButtons[x][y].setBackground(mvc.color3);
                 mvc.gameButtons[x][y].setEnabled(true);
             }
         }
+        mvc.scoreArea.setText("0");
+        mvc.tally=0;
+        mvc.stopClock();
+        mvc.timerArea.setText("0");
+        //mvc.clock.cancel();
+        //mvc.restart.setEnabled(true);
+        //mvc.markBox.setEnabled(true);
     }
-
-
     /**
      * Purpose: will display Solutions to board and set colors to each block that is correct and incorrect.
      * Name: Solutions
@@ -665,7 +729,7 @@ class Controller extends JFrame {
     void solutions(Model m){
         for(x=0;x<5;x++){
             for(y=0;y<5;y++){
-                if(m.getClickedBox(x,y)==0){
+                /*if(m.getClickedBox(x,y)==0){
                     mvc.gameButtons[x][y].setBackground(mvc.color6);
                 }
                 else if(m.getClickedBox(x,y)==1){
@@ -673,27 +737,40 @@ class Controller extends JFrame {
                 }
                 else{
                     mvc.gameButtons[x][y].setBackground(mvc.color4);
+                }*/
+                if(m.getClickedBox(x,y)==0){
+                    mvc.gameButtons[x][y].setBackground(mvc.color5);
+                }
+                else {
+                    mvc.gameButtons[x][y].setBackground(mvc.color6);
+                    mvc.gameButtons[x][y].setIcon(xs);
                 }
                 mvc.gameButtons[x][y].setEnabled(false);
-                mvc.restart.setEnabled(false);
-                mvc.restart_timer.setEnabled(false);
-                mvc.markBox.setEnabled(false);
             }
         }
+        mvc.restart.setEnabled(false);
+        mvc.restart_timer.setEnabled(false);
+        mvc.markBox.setEnabled(false);
     }
-
     /**
      * Purpose: will reset the game clock and will display another countdown
      * Name: NewGameCLock
      * @param mod model object
      */
     void newGameClock(Model mod){
-        mvc.secs = 0;
+        /*mvc.secs = 0;
         mvc.timerArea.setText(String.valueOf(mvc.secs));
         mvc.clock = new Timer();
-        mvc.clock();
-    }
+        mvc.clock();*/
+        try{
+            mvc.secs =0;
+            mvc.clock = new Timer();
+            mvc.clock();
 
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
     /**
      * Purpose: Once a message is written and share it will clear the input box
      * Name: shareChat
@@ -703,7 +780,6 @@ class Controller extends JFrame {
         textOut.println(s);
         mvc.Input.setText(null); //clears message box
     }
-
     /**
      * Purpose: Is used to identify server actions and what they produce in terms of output
      * Name: updateChat
@@ -736,13 +812,17 @@ class Controller extends JFrame {
             mvc.chat.append("PLAYER   SCORE   TIME\n");
             mvc.chat.append("======================\n");
             for(String player: play) {
-                mvc.chat.append(player + ",     " + winnerScore + ",    " +mvc.secs+"\n");
+                mvc.chat.append(player + ",     " + getGameScore + ",    " +mvc.secs+"\n");
             }
             return True;
         }
         if(s.contains("/get")){
-            System.out.println("Game Board Received "+mod.newgrid+"\n");
-            mvc.chat.append("Game Board Received "+mod.newgrid+ "\n");
+            System.out.println("Game Board Received ");//+mod.shareGrid+"\n");
+            mvc.chat.append("Game Board Received ");//+mod.shareGrid+ "\n");
+            for (int len = 0; len < mod.gridNums.length(); len++) {
+                mvc.chat.append(Arrays.toString(mod.grid[len]) + "\n");
+                System.out.println(Arrays.toString(mod.grid[len]) + "");
+            }
             return True;
         }
         return False;
@@ -764,7 +844,6 @@ class Controller extends JFrame {
             mvc.newConnect.setEnabled(true);
         }
     }
-
     /**
      * Purpose: This innerClass will be a thread that send information from users, will identify when server is interrupted
      * Name: serverController
@@ -789,16 +868,15 @@ class Controller extends JFrame {
                         }
                     }
                 } catch (IOException ioException) {
-                    mvc.chat.append("YOU HAVE DISCONNECTED THE SERVER..PLEASE START A NEW SERVER");
-                    System.err.println("YOU HAVE DISCONNECTED THE SERVER..PLEASE START A NEW SERVER");
+                    mvc.chat.append("YOU HAVE DISCONNECTED FROM THE SERVER\n");
+                    System.err.println("YOU HAVE DISCONNECTED FROM THE SERVER");
                 }catch (Exception e){
-                    mvc.chat.append("YOU HAVE DISCONNECTED THE SERVER..PLEASE START A NEW SERVER\n");
-                    System.err.println("YOU HAVE DISCONNECTED THE SERVER..PLEASE START A NEW SERVER");
+                    mvc.chat.append("YOU HAVE DISCONNECTED FROM THE SERVER\n");
+                    System.err.println("YOU HAVE DISCONNECTED FROM THE SERVER");
                 }
             }
         }
     }
-
     /**
      * Purpose: add actions to each button option in game
      * Name: ControllerActions extending JFrame & implements ActionListener
@@ -821,13 +899,271 @@ class Controller extends JFrame {
             /*
              * GameButton Listener
              */
-            if(obj != mvc.gameButtons){
+            /*if(obj != mvc.gameButtons){
                 for(int x=0;x<5;x++){
                     for(int y=0;y<5;y++){
                         if(obj==mvc.gameButtons[x][y]){
-                            buttonPressed(x,y);
                             mvc.chat.append(mvc.gameButtons[x][y].getText()+x+" : "+y+" is Pressed \n");
                             System.out.println(mvc.gameButtons[x][y].getText()+x+" : "+y+" is Pressed");
+                            buttonPressed(x,y);
+                        }
+                    }
+                }
+            }*/
+            if (obj != mvc.gameButtons) {
+                for (int x = 0; x < mod.size; x++) {
+                    for (int y = 0; y < mod.size; y++) {
+                        if (obj == mvc.gameButtons[x][y]) {
+                            mvc.chat.append(mvc.gameButtons[x][y].getText() + x + " : " + y + " is Pressed \n");
+                            System.out.println(mvc.gameButtons[x][y].getText() + x + " : " + y + " is Pressed");
+                            buttonPressed(x, y);
+                            //buttonListen(e);
+                            if (mvc.tally >= 15) {
+                                String[] options = {"Yes", "No","View Board","Cancel"};
+                                int win = JOptionPane.showOptionDialog(null, "", "WINNER", JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, winPic,options,options[0]);
+                                getGameTime = mvc.timerArea.getText();
+                                getGameScore = mvc.scoreArea.getText();
+                                /*switch (win) {
+                                    case JOptionPane.YES_OPTION:{
+                                        for (int xx = 0; xx < 5; xx++) {
+                                            for (int yy = 0; yy < 5; yy++) {
+                                                mvc.gameButtons[xx][yy].setEnabled(false);
+                                            }
+                                        }
+                                        System.out.println("You have uploaded your score!!\nPlease connect to a server to view grid, score and time");
+                                        mvc.chat.append("You have uploaded your score!!\nPlease connect to a server to \n  view grid, score and time");
+                                        //System.out.println("Score Table updated with \n");
+                                        //System.out.println("Score :" + getGameScore);//winnerScore = mvc.scoreArea.getText();
+                                        //System.out.println("Timer :" + getGameTime); ////timerSecs = mvc.timerArea.getText();
+                                        //System.out.println("Gameboard: ");
+                                        solutions(mod);
+                                        for (int len = 0; len < mod.gridNums.length(); len++) {
+                                            //mvc.chat.append(Arrays.toString(mod.grid[len]) + "\n");
+                                            System.out.println(Arrays.toString(mod.grid[len]) + "");
+                                        }
+                                        mvc.clock.cancel();
+                                        break;
+                                    }
+                                    case JOptionPane.NO_OPTION: {
+                                        System.out.println("You have chosen NOT to upload your score");
+                                        //mvc.scoreArea.setText("");
+                                        getGameScore = "0";
+                                        getGameTime = "0";
+                                        for (int xX = 0; xX < mod.size; xX++) {
+                                            for (int yY = 0; yY < mod.size; yY++) {
+                                                mvc.gameButtons[xX][yY].setEnabled(false);
+                                            }
+                                        }
+                                        mvc.clock.cancel();
+                                        break;
+                                    }
+                                    case JOptionPane.PLAIN_MESSAGE:{
+                                        //System.out.println("Score :" + getGameScore);//winnerScore = mvc.scoreArea.getText();
+                                        //System.out.println("Timer :" + getGameTime); ////timerSecs = mvc.timerArea.getText();
+                                        //System.out.println("Gameboard: ");
+                                        solutions(mod);
+                                        for (int len = 0; len < mod.gridNums.length(); len++) {
+                                            //System.out.println(Arrays.toString(mod.grid[len]) + "");
+                                            mvc.chat.setText(Arrays.toString(mod.grid[len]) + "\n");
+                                        }
+                                    }
+                                    case JOptionPane.CANCEL_OPTION:{
+                                        System.out.println("You have chosen to cancel");
+                                        break;
+                                    }
+                                    default:{
+                                        for (int d = 0; d < 5; d++) {
+                                            for (int f = 0; f < 5; f++) {
+                                                mvc.gameButtons[d][f].setEnabled(false);
+                                            }
+                                        }
+                                        System.out.println("Score :" + getGameScore+"\n"+"Timer :" + getGameTime);//winnerScore = mvc.scoreArea.getText();
+                                        //System.out.println("Solution Grid: ");
+                                        solutions(mod);
+                                        for (int len = 0; len < mod.gridNums.length(); len++) {
+                                            System.out.println(Arrays.toString(mod.grid[len]) + "");
+                                        }
+                                        mvc.clock.cancel();
+                                        break;
+                                    }
+                                    mvc.gameButtons[x][y].setDefaultCapable(false);
+                                    mvc.scoreArea.setText("0");
+                                    mvc.tally = 0;
+                                }*/
+                                if(win ==0){ //yes
+                                    if(isConnected == false) {
+                                        for (int xx = 0; xx < 5; xx++) {
+                                            for (int yy = 0; yy < 5; yy++) {
+                                                mvc.gameButtons[xx][yy].setEnabled(false);
+                                            }
+                                        }
+                                        System.out.println("You have uploaded your score!!\nPlease connect to a server to view grid, score and time");
+                                        mvc.chat.append("You have uploaded your score!!\nPlease connect to a server to \nview grid, score and time\n");
+                                        //mvc.restart.setEnabled(false);
+                                        mvc.restart_timer.setEnabled(false);
+                                        mvc.clock.cancel();
+                                        break;
+                                    }
+                                    else {
+                                        for (int xx = 0; xx < 5; xx++) {
+                                            for (int yy = 0; yy < 5; yy++) {
+                                                mvc.gameButtons[xx][yy].setEnabled(false);
+                                            }
+                                        }
+                                        System.out.println("You have uploaded your score!!");
+                                        mvc.chat.append("You have uploaded your score!!\n");
+                                        mvc.restart.setEnabled(false);
+                                        mvc.restart_timer.setEnabled(false);
+                                        mvc.clock.cancel();
+                                        break;
+                                    }
+                                }
+                                else if (win == 1){ //no
+                                    System.out.println("You have chosen NOT to upload your score");
+                                    //mvc.scoreArea.setText("");
+                                    getGameScore = "0";
+                                    getGameTime = "0";
+                                    for (int xX = 0; xX < mod.size; xX++) {
+                                        for (int yY = 0; yY < mod.size; yY++) {
+                                            mvc.gameButtons[xX][yY].setEnabled(false);
+                                        }
+                                    }
+                                   // mvc.restart.setEnabled(false);
+                                    mvc.restart_timer.setEnabled(false);
+                                    mvc.clock.cancel();
+                                    break;
+                                }
+                                else if(win == 2){
+                                    for (int xx = 0; xx < 5; xx++) {
+                                        for (int yy = 0; yy < 5; yy++) {
+                                            mvc.gameButtons[xx][yy].setEnabled(false);
+                                        }
+                                    }
+                                    mvc.chat.append("GameBoard:\n");
+                                    System.out.println("GameBoard: \n");
+                                    for (int len = 0; len < mod.gridNums.length(); len++) {
+                                        mvc.chat.append(Arrays.toString(mod.grid[len]) + "\n");
+                                        System.out.println(Arrays.toString(mod.grid[len]) + "");
+                                    }
+                                   // mvc.restart.setEnabled(false);
+                                    mvc.restart_timer.setEnabled(false);
+                                    mvc.clock.cancel();
+                                    break;
+                                }
+                                else if(win == 3){
+                                    for (int xx = 0; xx < 5; xx++) {
+                                        for (int yy = 0; yy < 5; yy++) {
+                                            mvc.gameButtons[xx][yy].setEnabled(false);
+                                        }
+                                    }
+                                    System.out.println("You have chosen to cancel");
+                                    //mvc.restart.setEnabled(false);
+                                    mvc.restart_timer.setEnabled(false);
+                                    mvc.clock.cancel();
+                                }
+                                else{
+                                    for (int xx = 0; xx < 5; xx++) {
+                                        for (int yy = 0; yy < 5; yy++) {
+                                            mvc.gameButtons[xx][yy].setEnabled(false);
+                                        }
+                                    }
+                                    System.out.println("You have won");
+                                    //mvc.restart.setEnabled(false);
+                                    mvc.restart_timer.setEnabled(false);
+                                    mvc.clock.cancel();
+                                }
+                                mvc.clock.cancel();
+                                mvc.gameButtons[x][y].setEnabled(false);
+                            }
+                            else if (mvc.tally <= -5) {
+                                String[] options = {"Yes", "No","View Board","Cancel"};
+                                int win = JOptionPane.showOptionDialog(null, "", "LOOSER", JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, losePic,options,options[0]);
+                                getGameTime = mvc.timerArea.getText();
+                                getGameScore = mvc.scoreArea.getText();
+                                if(win ==0){ //yes
+                                    if(isConnected == false) {
+                                        mvc.cancelClock();
+                                        for (int xx = 0; xx < 5; xx++) {
+                                            for (int yy = 0; yy < 5; yy++) {
+                                                mvc.gameButtons[xx][yy].setEnabled(false);
+                                            }
+                                        }
+                                        System.out.println("You have uploaded your score!!\nPlease connect to a server to view grid, score and time");
+                                        mvc.chat.append("You have uploaded your score!!\nPlease connect to a server to \nview grid, score and time\n");
+                                        mvc.restart.setEnabled(false);
+                                        mvc.restart_timer.setEnabled(false);
+                                        break;
+                                    }
+                                    else {
+                                        mvc.cancelClock();
+                                        for (int xx = 0; xx < 5; xx++) {
+                                            for (int yy = 0; yy < 5; yy++) {
+                                                mvc.gameButtons[xx][yy].setEnabled(false);
+                                            }
+                                        }
+                                        System.out.println("You have uploaded your score!!");
+                                        mvc.chat.append("You have uploaded your score!!\n");
+                                        mvc.restart.setEnabled(false);
+                                        mvc.restart_timer.setEnabled(false);
+                                        break;
+                                    }
+                                }
+                                else if (win == 1){ //no
+                                    mvc.cancelClock();
+                                    System.out.println("You have chosen NOT to upload your score");
+                                    //mvc.scoreArea.setText("");
+                                    getGameScore = "0";
+                                    getGameTime = "0";
+                                    for (int xX = 0; xX < mod.size; xX++) {
+                                        for (int yY = 0; yY < mod.size; yY++) {
+                                            mvc.gameButtons[xX][yY].setEnabled(false);
+                                        }
+                                    }
+                                    mvc.restart.setEnabled(false);
+                                    mvc.restart_timer.setEnabled(false);
+                                    break;
+                                }
+                                else if(win == 2){
+                                    mvc.cancelClock();
+                                    for (int xx = 0; xx < 5; xx++) {
+                                        for (int yy = 0; yy < 5; yy++) {
+                                            mvc.gameButtons[xx][yy].setEnabled(false);
+                                        }
+                                    }
+                                    mvc.chat.append("GameBoard:\n");
+                                    System.out.println("GameBoard: \n");
+                                    for (int len = 0; len < mod.gridNums.length(); len++) {
+                                        mvc.chat.append(Arrays.toString(mod.grid[len]) + "\n");
+                                        System.out.println(Arrays.toString(mod.grid[len]) + "");
+                                    }
+                                    mvc.restart.setEnabled(false);
+                                    mvc.restart_timer.setEnabled(false);
+                                    break;
+                                }
+                                else if(win == 3){
+                                    mvc.cancelClock();
+                                    for (int xx = 0; xx < 5; xx++) {
+                                        for (int yy = 0; yy < 5; yy++) {
+                                            mvc.gameButtons[xx][yy].setEnabled(false);
+                                        }
+                                    }
+                                    System.out.println("You have chosen to cancel");
+                                    mvc.restart.setEnabled(false);
+                                    mvc.restart_timer.setEnabled(false);
+                                }
+                                else{
+                                    mvc.cancelClock();
+                                    for (int xx = 0; xx < 5; xx++) {
+                                        for (int yy = 0; yy < 5; yy++) {
+                                            mvc.gameButtons[xx][yy].setEnabled(false);
+                                        }
+                                    }
+                                    System.out.println("You have lost");
+                                    mvc.restart.setEnabled(false);
+                                    mvc.restart_timer.setEnabled(false);
+                                }
+                                mvc.gameButtons[x][y].setEnabled(false);
+                            }
                         }
                     }
                 }
@@ -835,29 +1171,36 @@ class Controller extends JFrame {
             /*
              * Restart Board Button Listener
              */
-            if(obj == mvc.restart){
+            if (obj == mvc.restart) {
                 mvc.chat.setText("Restart Game\n");
-                newBoard();
                 System.out.println("Restart Game Selected");
+                newBoard();
+                //mvc.scoreArea.setText("0"); mvc.tally = 0;
+                mvc.scoreArea.setText("0");
+                mvc.timerArea.setText("0");
+                mvc.gameResetBut(mod);
+                newGameClock(mod);
             }
             /*
              * Restart Timer Button Listener
              */
-            if(obj == mvc.restart_timer){
+            if (obj == mvc.restart_timer) {
                 mvc.chat.setText("Restart Timer\n");
                 mvc.clock.cancel();
+                mvc.scoreArea.setText("0");
+                mvc.tally = 0;
                 newGameClock(mod);
                 System.out.println("Restart Timer Selected");
             }
             /*
              * MarkBox Button Listener
              */
-            if(obj == mvc.markBox){
-                if(mvc.markBox.isSelected()==true){
+            if (obj == mvc.markBox) {
+                if (mvc.markBox.isSelected() == true) {
                     mvc.chat.append("MARK is Selected\n");
                     System.out.println("MARK is Selected");
                 }
-                if(mvc.markBox.isSelected()== false){
+                if (mvc.markBox.isSelected() == false) {
                     mvc.chat.append("MARK is unSelected\n");
                     System.out.println("MARK is unSelected");
                 }
@@ -865,132 +1208,110 @@ class Controller extends JFrame {
             /*
              * NewGame Button Listener
              */
-            if(obj == mvc.NewGameMI){
-                mvc.chat.append("New Game is Selected\n");
+            else if (obj == mvc.NewGameMI) {
+                //newBoard();
+                //newGameClock(mod);
+                //mod.Game();
+                mod.newGameBoard(); //newGame
+                mod.Game(); //defaultGame
+                mvc.clock.cancel();
+                newGameClock(mod); //updateBoard
+                cHints(mod.size, mod);
+                rHints(mod.size, mod);
+                mvc.gameReset(mod); //newGameReset
+                mvc.scoreArea.setText("0");
+                mvc.tally = 0;
+                //newBoard();
+                mvc.chat.setText("New Game is Selected\n");
                 System.out.println("New Game is Selected");
                 mvc.restart.setEnabled(true);
                 mvc.restart_timer.setEnabled(true);
                 mvc.markBox.setEnabled(true);
-                newBoard();
-                mod.Game();
-                mod.newGameBoard();
-                rHints(5);cHints(5);
-                mvc.clock.cancel();
-                newGameClock(mod);
-
             }
             /*
              * Solution Button Listener
              */
-            if(obj == mvc.SolutionsMI) {
-                mvc.chat.append("Solutions is Selected\n");
+            if (obj == mvc.SolutionsMI) {
                 mvc.clock.cancel();
                 solutions(mod);
+                mvc.chat.append("Solutions is Selected\n");
+                for (int x = 0; x < mod.grid.length; x++) {
+                    mvc.chat.append(Arrays.toString(mod.grid[x]) + "\n");
+
+                }
             }
             /*
              * Exit Button Listener
              */
-            if(obj==mvc.ExitMI){
-                JOptionPane.showMessageDialog(null,"THANKS FOR PLAYING!!! PRESS OK TO EXIT GAME");
+            if (obj == mvc.ExitMI) {
+                JOptionPane.showMessageDialog(null, "THANKS FOR PLAYING!!! PRESS OK TO EXIT GAME");
                 System.exit(0);
             }
             /*
              * About Button Listener
              */
-            if(obj==mvc.AboutMI) {
+            if (obj == mvc.AboutMI) {
                 mvc.clock.cancel();
-                JOptionPane.showMessageDialog(null, "Piccross-Game-With-Two-C's\n" +
-                        "\nBy Ahmed (SID) Mohamed\n" +
-                        "\nStudent ID: 041019389\n" +
-                        "\nWinter Term 2022\n");
+                JOptionPane.showMessageDialog(null, "Piccross-With-Two-C's\n" +
+                                "\nBy Ahmed (SID) Mohamed\n"
+                        //+ "\nStudent ID: 041019389\n"
+                        //+"\nWinter Term 2022\n"
+                );
                 newGameClock(mod);
-            }
-            /*
-             * Debug1 button listener
-             */
-            if(obj==mvc.Debug1){
-                mvc.chat.append("Debug Scenario 1 Selected\n");
-                solutions(mod);
-                mvc.clock.cancel();
-            }
-            /*
-             * Debug2 button listener
-             */
-            if(obj==mvc.Debug2){
-                mvc.chat.append("Debug Scenario 2 Selected\n");
-                newBoard();
-                mod.Game();
-                mod.newGameBoard();
-                mvc.clock.cancel();
-                newGameClock(mod);
-            }
-            /*
-             * Debug3 button listener
-             */
-            if(obj==mvc.Debug3){
-                mvc.chat.append("Debug Scenario 3 Selected\n");
-                mvc.clock.cancel();
-                mvc.restart.setEnabled(false);
-                mvc.restart_timer.setEnabled(false);
-                mvc.markBox.setEnabled(false);
             }
             /*
              * Submit to chat
              */
             if (obj == mvc.submit) {
                 String chatMessage = mvc.Input.getText();
-                if(UpdateChat(chatMessage)==0){
+                if (UpdateChat(chatMessage) == 0) {
                     shareChat(chatMessage);
                 }
             }
             /*
              * Connect To network
              */
-            if(obj==mvc.newConnect){
+            if (obj == mvc.newConnect) {
+
                 Thread thread;
                 String piccrossServer;
                 pnmvc.PiccrossNetworkModalVC();
                 /*Instantiate Network Dialog Box*/
                 Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
-                int x = (int)((dimension.getWidth()- pnmvc.getWidth())/2);
-                int y = (int)((dimension.getHeight()- pnmvc.getHeight())/2);
-                pnmvc.setLocation(x,y);
+                int x = (int) ((dimension.getWidth() - pnmvc.getWidth()) / 2);
+                int y = (int) ((dimension.getHeight() - pnmvc.getHeight()) / 2);
+                pnmvc.setLocation(x, y);
                 pnmvc.setVisible(true);
-                try{
+                try {
                     client = pnmvc.getName();
                     piccrossServer = pnmvc.getAddress();
                     port = pnmvc.getPort();
-                    mvc.chat.append("Negotiating Connection to: "+ piccrossServer + "\n on port: "+ port+ "\n");
+                    mvc.chat.append("Negotiating Connection to: " + piccrossServer + "\n on port: " + port + "\n");
                     socket = new Socket(piccrossServer, port);
                     mvc.chat.append("Connection is Successful!!\n");
                     mvc.chat.append("Welcome to Ahmed's Piccross Server\n");
                     mvc.chat.append("Enter '/help' for Commands.\n");
 
                     buffReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-                    textOut= new PrintWriter(socket.getOutputStream(), true);
+                    textOut = new PrintWriter(socket.getOutputStream(), true);
                     textOut.println(client);
                     thread = new serverController();
                     thread.start();
                     isConnected = true;
                     connection(isConnected);
-                }
-                catch (ConnectException connectException){
+                } catch (ConnectException connectException) {
                     //connectException.printStackTrace();
-                    mvc.chat.append("ERROR: CONNECTION REFUSED, SERVER IS NOT AVAILABLE\n" );
-                }
-                catch (SocketTimeoutException socketException){
+                    mvc.chat.append("ERROR: CONNECTION REFUSED, SERVER IS NOT AVAILABLE\n");
+                } catch (SocketTimeoutException socketException) {
                     //socketException.printStackTrace();
                     mvc.chat.append("ERROR: CONNECTION REFUSED, SOCKET TIMED OUT\n");
-                }
-                catch (UnknownHostException unknownHostException) {
+                } catch (UnknownHostException unknownHostException) {
                     //unknownHostException.printStackTrace();
                     mvc.chat.append("ERROR: UNKNOWN HOST. THE ADDRESS CANT BE FOUND\n");
-                }
-                catch (IllegalArgumentException illegalArgumentException){
+                } catch (IllegalArgumentException illegalArgumentException) {
                     //illegalArgumentException.printStackTrace();
                     mvc.chat.append("ERROR: YOU HAVE CLOSED THE NETWORK BOX\n");
-                }
-                catch (IOException ioException) {
+                } catch (IOException ioException) {
                     //ioException.printStackTrace();
                     mvc.chat.append("ERROR: UNKNOWN HOST. THE ADDRESS CANT BE FOUND\n");
                 }
@@ -999,19 +1320,44 @@ class Controller extends JFrame {
             /*
              * Disconnect From network
              */
-            if(obj==mvc.disconnect){
-               // do {
-                    if (UpdateChat("/bye") == 0) {
-                        shareChat("/bye");
-                    }
-                    isConnected = false;
-                    connection(isConnected);
-               // }while(Thread.currentThread().isInterrupted());
+            if (obj == mvc.disconnect) {
+                // do {
+                if (UpdateChat("/bye") == 0) {
+                    shareChat("/bye");
+                }
+                isConnected = false;
+                connection(isConnected);
+                mvc.chat.setText("");
+                // }while(Thread.currentThread().isInterrupted());
             }
+            /* Debug1 button listener
+            if(obj==mvc.Debug1){
+                mvc.chat.append("Debug Scenario 1 Selected\n");
+                solutions(mod);
+                mvc.clock.cancel();
+            }
+            // Debug2 button listener
+            if(obj==mvc.Debug2){
+                mvc.chat.append("Debug Scenario 2 Selected\n");
+                newBoard();
+                mod.Game();
+                mod.newGameBoard();
+                mvc.clock.cancel();
+                newGameClock(mod);
+            }
+            // Debug3 button listener
+
+            if(obj==mvc.Debug3){
+                mvc.chat.append("Debug Scenario 3 Selected\n");
+                mvc.clock.cancel();
+                mvc.restart.setEnabled(false);
+                mvc.restart_timer.setEnabled(false);
+                mvc.markBox.setEnabled(false);
+            }*/
         }
     }
-
 }
+
 /**
  * Sub-Class Name: Model
  * Purpose: to generate continuous random game boards using 5 element string of 1s and 0s
@@ -1020,12 +1366,87 @@ class Controller extends JFrame {
 class Model {
     protected ModelViewController mvc;
     protected Controller c;
-    protected int grid[][];
-    protected String gridNums = "11110",newgrid="";
-    protected int size=5,nextNum;
+    int grid[][];
+    String gridNums = "00111,00100,10101,11111,01010";
+    public static int size=5;
+    //protected int nextNum;
     protected StringTokenizer stringTokenizer;
-    protected Random r = new Random();
     String shareGrid;
+    /**
+     * Purpose: to generate a new random board for 25 elements
+     * Name: newGameBoard
+     */
+    public void newGameBoard(){
+        Random r = new Random();
+        int nextNum = r.nextInt(10);
+        if(nextNum>=1){
+            String newgrid = "";
+            for(int z=0; z<size;z++){
+                int nextRand=r.nextInt((int)Math.pow(2,size)-1);
+                if(z==size-1) {
+                    newgrid = newgrid + Integer.toBinaryString((1 << size) | nextRand).substring(1);
+                }
+                else{
+                    newgrid = newgrid + Integer.toBinaryString((1 << size) | nextRand).substring(1)+ ",";
+                }
+            }
+            this.gridNums=newgrid;
+            newgrid = shareGrid;
+        }
+    }
+    /**
+     * Purpose: Generates Board of 25 elements using string of 5 0s and 1s
+     * Name: Game
+     */
+    public void Game() {
+        try {
+        //nextNum = r.nextInt(10);
+        int e = 0;
+        int f = 0;
+        this.grid = new int[size][size];
+        /*if(nextNum>=1){
+            String newgrid="";
+            for(int z=0; z<5;z++){
+                int nextRand=r.nextInt((int)Math.pow(2,5));
+                newgrid= newgrid + Integer.toBinaryString((1<<5) | nextRand).substring(1) + " ";
+            }this.gridNums=newgrid;
+        }*/
+        stringTokenizer = new StringTokenizer(gridNums, ","); //to tokenize each number of the 25 element string of 1 and 0
+        while (stringTokenizer.hasMoreTokens()){//do {
+            gridNums = stringTokenizer.nextToken();
+            //for (e = 0; e < 5; e++) {
+            for (f = 0; f < size; f++) {
+                if (gridNums.charAt(f) == '0') {
+                    grid[e][f] = 0;
+                }
+                //else if (gridNums.charAt(e) == '1') {
+                else {
+                    grid[e][f] = 1;
+                }
+                //}
+            }
+            e++;
+            } //while (stringTokenizer.hasMoreTokens());
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+
+    }
+    public String getGridNums(){
+        return shareGrid;
+    }
+    public int[][] getGrid(){
+        return grid;
+    }
+    public boolean validMove(int grid[][]){
+        for(int a =0; a<size;a++){
+            for(int b=0;b<size;b++) {
+                if (grid[a][b]== '1'){
+                    return true;
+                }
+            }
+        }return false;
+    }
     /**
      * Purpose: will use a 2D grid and place values of x and y inside it, used to check where each element is in the grid
      * Name: getClickedBox
@@ -1037,52 +1458,5 @@ class Model {
         int z = grid[x][y];
         return z;
     }
-    /**
-     * Purpose: Generates Board of 25 elements using string of 5 0s and 1s
-     * Name: Game
-     */
-    public void Game() {
-        nextNum = r.nextInt(10);
-        int x, y=0;
-        this.grid = new int[size][size];
-        if(nextNum>=1){
-            String newgrid="";
-            for(int z=0; z<5;z++){
-                int nextRand=r.nextInt((int)Math.pow(2,5));
-                newgrid= newgrid + Integer.toBinaryString((1<<5) | nextRand).substring(1) + " ";
-            }this.gridNums=newgrid;
-        }
-        stringTokenizer = new StringTokenizer(gridNums, " "); //to tokenize each number of the 25 element string of 1 and 0
-        do {
-            gridNums = stringTokenizer.nextToken();
-            for (x = 0; x < 5; x++) {
-                //for(y=0;y<5;y++) {
-                if (gridNums.charAt(x) == '1') {
-                    grid[x][y] = 1;
-                }
-                else if (gridNums.charAt(x) == '0') {
-                    grid[x][y] = 0;
-                }
-                //}
-            }
-            y++;
-            x++;
-        }while (stringTokenizer.hasMoreTokens());
-
-    }
-    /**
-     * Purpose: to generate a new random board for 25 elements
-     * Name: newGameBoard
-     */
-    public void newGameBoard(){
-        nextNum = r.nextInt(25);
-        if(nextNum>=1){
-            for(int z=0; z<5;z++){
-                int nextRand=r.nextInt((int)(Math.pow(2,5)));
-                newgrid=newgrid + Integer.toBinaryString((1<<5)|nextRand).substring(1)+" ";
-            }this.gridNums=newgrid;
-        }
-    }
-
 
 }

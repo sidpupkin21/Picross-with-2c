@@ -1,11 +1,8 @@
-/*
+/*#################################################
  * PiccrossServerClient Class
- * Author: Ahmed Mohamed
- * ID: 041019389
+ * Author: Ahmed Sid Mohamed
  * Last Edited Apr 17th, 2022
- * Assignment 4 CST 8221_302
- * Professor Daniel Cormier
- */
+ #################################################*/
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintStream;
@@ -21,7 +18,7 @@ public class PiccrossServerClient{
     protected String clientList; //String to store clients connected to server
     protected InputStream inputStream;  //object to read input from server
     protected PrintStream printStream; //object to (print/output) input from server
-    PiccrossServer piccrossServer;
+    //PiccrossServer piccrossServer;
 
     /**
      * Purpose: This will send and receive input and output from one user to another within the same port connection
@@ -107,7 +104,6 @@ public class PiccrossServerClient{
         displayInChat().println(clientName + " has disconnected from server\n");
     }
 }
-
 /**
  * Sub-Class Name: ServerClient
  * Purpose: This class will be used
@@ -116,9 +112,9 @@ public class PiccrossServerClient{
 class ServerClient implements Runnable{
     private final PiccrossServer pServer;
     private final PiccrossServerClient psClient;
-    private  ModelViewController mvc;
-    private Controller controller;
-    private Model model;
+    //private  ModelViewController mvc;
+    //private Controller controller;
+    //private Model model;
 
     /**
      * Purpose: This Constructor will assign server and clientServer
@@ -162,7 +158,7 @@ class ServerClient implements Runnable{
             pServer.disconnectClient(psClient);
             this.pServer.sendClientsToChat();
         }catch (NoSuchElementException no){
-            System.err.println("ERROR: YOU HAVE DISCONNECTED WITHOUT INFORMING THE SERVER....PLEASE ENTER /bye");
+            System.err.println("ERROR: YOU HAVE DISCONNECTED WITHOUT INFORMING THE SERVER/bye");
         }
     }
 }

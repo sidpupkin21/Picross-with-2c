@@ -1,11 +1,8 @@
-/*
- * PiccrossServer Class
- * Author: Ahmed Mohamed
- * ID: 041019389
+/*#################################################
+ * PicrossServer Class
+ * Author Ahmed Sid Mohamed
  * Last Edited Apr 15th, 2022
- * Assignment 4 CST 8221_302
- * Professor Daniel Cormier
- */
+ #################################################*/
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;

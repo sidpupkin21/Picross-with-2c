@@ -1,15 +1,13 @@
-/*
- * Class Main Class
- * @author Ahmed Mohamed
- * ID 041019389
+/*#################################################
+ * Game (Main) Class
+ * Author Ahmed Sid Mohamed
  * Last Edited Apr 15th, 2022
- * Assignment 4 CST 8221_302
- * Professor Daniel Cormier
- */
+ * Based on SplashScreen by Daniel Cormier
+ #################################################*/
+import jdk.nashorn.internal.scripts.JO;
+
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.Serializable;
 
 /**
@@ -20,7 +18,7 @@ public class Game extends JFrame implements Serializable{
     private static final long serialVersionUID = 2369696670020714054L;
     /**Splash Screen Duration*/
     private final int SSduration;
-    /**Default constuctor*/
+    /**Default constructor*/
     public Game(int SSduration) {
         this.SSduration = SSduration;
     }
@@ -32,7 +30,7 @@ public class Game extends JFrame implements Serializable{
         /**Custom colors*/
         Color color1 = new Color(167,149,214);
         Color color2 = new Color(146,123,204);
-        /**Create Constent panel*/
+        /**Create Constant panel*/
         JPanel contents = (JPanel)getContentPane();
         contents.setBackground(color1);
         /**Window boundaries*/
@@ -45,9 +43,9 @@ public class Game extends JFrame implements Serializable{
         setBounds(x,y,width,height);
 
         /** Set screen image inside a label*/
-        JLabel label = new JLabel(new ImageIcon("piccross.png"));
+        JLabel label = new JLabel(new ImageIcon("src/Pictures/splashLogo.png"));
         /**Set Label underneath the image label*/
-        JLabel name = new JLabel("Welcome To Piccross Game!!",JLabel.CENTER);
+        JLabel name = new JLabel("",JLabel.CENTER);//"Welcome To Piccross Game!!"
         name.setFont(new Font(Font.SANS_SERIF, Font.ITALIC, 20)); //modify font and size
         contents.add(label, BorderLayout.CENTER);
         contents.add(name, BorderLayout.NORTH);
@@ -102,6 +100,18 @@ public class Game extends JFrame implements Serializable{
         }
         Game splash = new Game(SSduration);
         splash.SplashScreen();
+        String messageOfHints = "How to Play " +
+                "\n1.Press ResetTimer to reset clock"+
+                "\n2.Press ResetGame to reset board"+
+                "\n3.Press Mark to mark boxes on board"+
+                "\n4.Press Alt+S to check solution"+
+                "\n5.Press Ctrl+C to start new game"+
+                "\n6.Press Ctrl+X to Exit Game"+
+                "\n7.For each correct box you will gain 1 points"+
+                "\n8.For each incorrect box you will lose 1 point"+
+                "\n9.To Win you must score 15 points or more"+
+                "\n10.Score below -5 and you lose the game";
+        JOptionPane.showMessageDialog(null, messageOfHints);
         EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {

@@ -1,28 +1,10 @@
-/*###############################################
-# PiccrossNetworkModalVC (ViewController)
-# by Daniel Cormier, for CST8221 Assignment 4
-#
-# This will produce a dialog which is modal that
-# will force the user to input the required particulars
-# for a network connection.
-
-Class Game
-Edited By: Ahmed Mohamed
-@author: Professor Daniel Cormier
-ID 041019389
-Last Edited Apr 15th, 2022
-Assignment 4 CST 8221_302
-#################################################*/
-/**
- * Class Main Class
- * @author Ahmed Mohamed
- * ID 041019389
+/*#################################################
+ * Class PicrossNetworkModalVC (ViewController)
+ * Author Daniel Cormier
+ * Author Ahmed Sid Mohamed
  * Last Edited Mar 15th, 2022
- * Assignment 3 CST 8221_302
- * Professor Daniel Cormier
- */
+ #################################################*/
 //Change the package as you need to.
-
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
