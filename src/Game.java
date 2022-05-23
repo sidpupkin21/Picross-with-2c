@@ -99,7 +99,7 @@ public class Game extends JFrame implements Serializable{
             }
         }
         Game splash = new Game(SSduration);
-        splash.SplashScreen();
+        //splash.SplashScreen();
         String messageOfHints = "How to Play " +
                 "\n1.Press ResetTimer to reset clock"+
                 "\n2.Press ResetGame to reset board"+
@@ -111,7 +111,7 @@ public class Game extends JFrame implements Serializable{
                 "\n8.For each incorrect box you will lose 1 point"+
                 "\n9.To Win you must score 15 points or more"+
                 "\n10.Score below -5 and you lose the game";
-        JOptionPane.showMessageDialog(null, messageOfHints);
+        //JOptionPane.showMessageDialog(null, messageOfHints);
         EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {

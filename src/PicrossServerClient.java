@@ -14,7 +14,7 @@ import java.util.Scanner;
  * Purpose: This class will handle the connection between Clients. It will also update client's name and disconnect them from server.
  * Methods: PiccrossServerClient | updateClient | displayInChat | getInChat | getClientNames | toString | disconnectClient
  */
-public class PiccrossServerClient{
+public class PicrossServerClient{
     protected String clientList; //String to store clients connected to server
     protected InputStream inputStream;  //object to read input from server
     protected PrintStream printStream; //object to (print/output) input from server
@@ -27,7 +27,7 @@ public class PiccrossServerClient{
      * @param clientName string holding client names
      * @exception IOException throws IOException when needed
      */
-    public PiccrossServerClient(Socket socket, String clientName){
+    public PicrossServerClient(Socket socket, String clientName){
         try{
             this.inputStream = socket.getInputStream();
             this.printStream = new PrintStream(socket.getOutputStream());
@@ -110,8 +110,8 @@ public class PiccrossServerClient{
  * Methods: ServerClient | Run
  */
 class ServerClient implements Runnable{
-    private final PiccrossServer pServer;
-    private final PiccrossServerClient psClient;
+    private final PicrossServer pServer;
+    private final PicrossServerClient psClient;
     //private  ModelViewController mvc;
     //private Controller controller;
     //private Model model;
@@ -123,7 +123,7 @@ class ServerClient implements Runnable{
      * @param psClient obj of PiccrossServerClient class
      *
      */
-    public ServerClient(PiccrossServer pServer, PiccrossServerClient psClient) {
+    public ServerClient(PicrossServer pServer, PicrossServerClient psClient) {
         this.pServer = pServer;
         this.psClient = psClient;
         this.pServer.sendClientsToChat();
@@ -140,20 +140,20 @@ class ServerClient implements Runnable{
     public void run() {
         try {
             Scanner scan = new Scanner(this.psClient.getInChat());
-            String name;
+            String serverInput;
             do {
-                name = scan.nextLine();
-                if (name.contains("/name (") &&
-                        name.contains(")")) {
-                    psClient.updateClient(name);
+                serverInput = scan.nextLine();
+                if (serverInput.contains("/name (") &&
+                        serverInput.contains(")")) {
+                    psClient.updateClient(serverInput);
                 }
-                if (name.contains("/bye")) {
+                if (serverInput.contains("/bye")) {
                     psClient.disconnectClient();
                     pServer.disconnectClient(psClient);
                     pServer.sendClient(psClient.clientList + " has disconnected from server");
                     this.pServer.sendClientsToChat();
                 }
-                pServer.sendChatToClient(name, psClient);
+                pServer.sendChatToClient(serverInput, psClient);
             } while (scan.hasNextLine());
             pServer.disconnectClient(psClient);
             this.pServer.sendClientsToChat();

@@ -1,5 +1,5 @@
 /*#################################################
- * Class PicrossNetworkModalVC (ViewController)
+ * PicrossNetworkModalVC (ViewController) Class
  * Author Daniel Cormier
  * Author Ahmed Sid Mohamed
  * Last Edited Mar 15th, 2022
@@ -25,7 +25,7 @@ import javax.swing.JPanel;
 @seePiccrossView
 **/
 
-public class PiccrossNetworkModalVC extends JDialog
+public class PicrossNetworkModalVC extends JDialog
 {
     /** Has the user pressed connect or cancel? */
     private Boolean hasConnected=false;
@@ -50,7 +50,7 @@ public class PiccrossNetworkModalVC extends JDialog
     /** This constructor requires a reference to the JFrame it will "interrupt".
     @param mainView the JFrame this basic UI will sit over. Generally your "view" class.
     **/
-    public PiccrossNetworkModalVC  (JFrame mainView)
+    public PicrossNetworkModalVC(JFrame mainView)
     {
         super(mainView,"Enter Network Address",true);
         
@@ -188,7 +188,7 @@ public class PiccrossNetworkModalVC extends JDialog
         pack();
     }
 
-    public PiccrossNetworkModalVC() {
+    public PicrossNetworkModalVC() {
 
     }
 
@@ -264,7 +264,7 @@ public class PiccrossNetworkModalVC extends JDialog
     @author Daniel Cormier
     @version 1.1
     @since 1.8.0_291
-    @see PiccrossNetworkModalVC
+    @see PicrossNetworkModalVC
     */
     private class Controller implements ActionListener
     {

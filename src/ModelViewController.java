@@ -97,7 +97,11 @@ public class ModelViewController extends JFrame {
     protected JMenuItem Debug3 = new JMenuItem("Debug 3");
     protected int tally;
     protected Timer clock;
-    protected int secs=0, mins=0,period = 1000, delay =0,a;
+    protected int secs=0;
+    protected int mins=0;
+    protected int period = 1000;
+    protected int delay =0;
+    protected int a;
     /*
      *Networking Items
      */
@@ -803,19 +807,25 @@ class Controller extends JFrame {
             return False;
         }
         if(s.contains("/who")){
-            for(String player: play){
-                mvc.chat.append("Current Player: "+ player + "\n");
+            for (String player : play) {
+                    {
+                        mvc.chat.append("Player: " + player + "\n");
+                    }
+
             }
             return True;
-        }
+        }/*
         if(s.contains("/score")){
             mvc.chat.append("PLAYER   SCORE   TIME\n");
             mvc.chat.append("======================\n");
             for(String player: play) {
-                mvc.chat.append(player + ",     " + getGameScore + ",    " +mvc.secs+"\n");
+
+                String scores = getGameScore;
+                String times = String.valueOf(mvc.secs);
+                mvc.chat.append(player + ",     " + scores + ",    " +times+"\n");
             }
             return True;
-        }
+        }*/
         if(s.contains("/get")){
             System.out.println("Game Board Received ");//+mod.shareGrid+"\n");
             mvc.chat.append("Game Board Received ");//+mod.shareGrid+ "\n");
@@ -895,7 +905,7 @@ class Controller extends JFrame {
         @Override
         public void actionPerformed(ActionEvent actionEvent) {
             Object obj = actionEvent.getSource();
-            PiccrossNetworkModalVC pnmvc = new PiccrossNetworkModalVC(this);
+            PicrossNetworkModalVC pnmvc = new PicrossNetworkModalVC(this);
             /*
              * GameButton Listener
              */
@@ -1082,7 +1092,7 @@ class Controller extends JFrame {
                                 getGameScore = mvc.scoreArea.getText();
                                 if(win ==0){ //yes
                                     if(isConnected == false) {
-                                        mvc.cancelClock();
+                                        //mvc.cancelClock();
                                         for (int xx = 0; xx < 5; xx++) {
                                             for (int yy = 0; yy < 5; yy++) {
                                                 mvc.gameButtons[xx][yy].setEnabled(false);
@@ -1090,12 +1100,13 @@ class Controller extends JFrame {
                                         }
                                         System.out.println("You have uploaded your score!!\nPlease connect to a server to view grid, score and time");
                                         mvc.chat.append("You have uploaded your score!!\nPlease connect to a server to \nview grid, score and time\n");
-                                        mvc.restart.setEnabled(false);
+                                        //mvc.restart.setEnabled(false);
+                                        mvc.clock.cancel();
                                         mvc.restart_timer.setEnabled(false);
                                         break;
                                     }
                                     else {
-                                        mvc.cancelClock();
+                                        //mvc.cancelClock();
                                         for (int xx = 0; xx < 5; xx++) {
                                             for (int yy = 0; yy < 5; yy++) {
                                                 mvc.gameButtons[xx][yy].setEnabled(false);
@@ -1103,8 +1114,9 @@ class Controller extends JFrame {
                                         }
                                         System.out.println("You have uploaded your score!!");
                                         mvc.chat.append("You have uploaded your score!!\n");
-                                        mvc.restart.setEnabled(false);
+                                        //mvc.restart.setEnabled(false);
                                         mvc.restart_timer.setEnabled(false);
+                                        mvc.clock.cancel();
                                         break;
                                     }
                                 }
@@ -1119,7 +1131,7 @@ class Controller extends JFrame {
                                             mvc.gameButtons[xX][yY].setEnabled(false);
                                         }
                                     }
-                                    mvc.restart.setEnabled(false);
+                                    //mvc.restart.setEnabled(false);
                                     mvc.restart_timer.setEnabled(false);
                                     break;
                                 }
@@ -1136,7 +1148,7 @@ class Controller extends JFrame {
                                         mvc.chat.append(Arrays.toString(mod.grid[len]) + "\n");
                                         System.out.println(Arrays.toString(mod.grid[len]) + "");
                                     }
-                                    mvc.restart.setEnabled(false);
+                                    //mvc.restart.setEnabled(false);
                                     mvc.restart_timer.setEnabled(false);
                                     break;
                                 }
@@ -1148,7 +1160,7 @@ class Controller extends JFrame {
                                         }
                                     }
                                     System.out.println("You have chosen to cancel");
-                                    mvc.restart.setEnabled(false);
+                                    //mvc.restart.setEnabled(false);
                                     mvc.restart_timer.setEnabled(false);
                                 }
                                 else{
@@ -1159,7 +1171,7 @@ class Controller extends JFrame {
                                         }
                                     }
                                     System.out.println("You have lost");
-                                    mvc.restart.setEnabled(false);
+                                    //mvc.restart.setEnabled(false);
                                     mvc.restart_timer.setEnabled(false);
                                 }
                                 mvc.gameButtons[x][y].setEnabled(false);
@@ -1367,7 +1379,7 @@ class Model {
     protected ModelViewController mvc;
     protected Controller c;
     int grid[][];
-    String gridNums = "00111,00100,10101,11111,01010";
+    String gridNums = "00111,11000,10101,00001,10000";//"00111,00100,10101,11111,01010";
     public static int size=5;
     //protected int nextNum;
     protected StringTokenizer stringTokenizer;
